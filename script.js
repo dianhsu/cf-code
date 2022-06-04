@@ -6,6 +6,7 @@
 // @version     1.0
 // @author      dianhsu
 // @run-at      document-idle
+// @downloadURL https://raw.githubusercontent.com/dianhsu/cf-code/main/script.js
 // @description 2022/6/4 15:41:09
 // ==/UserScript==
 
