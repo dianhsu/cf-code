@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "cf-code"
+version = "0.1.0"
+description = ""
+authors = ["dianhsu <xudian.cn@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Flask = "^2.1.2"
+requests = "^2.27.1"
+beautifulsoup4 = "^4.11.1"
+lxml = "^4.9.0"
+pycryptodome = "^3.14.1"
+redis = "^4.3.3"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
