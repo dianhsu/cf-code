@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from flask import Flask
 from flask import redirect
 from requests import RequestException
-
+import traceback
 from util import aes_decrypt
 
 app = Flask(__name__)
@@ -129,8 +129,8 @@ class Codeforces:
     def __init__(self, account, *args, **kwargs):
         self._account = account
         self._req = HttpUtil(*args, **kwargs)
-        if r.get('account_cookies'):
-            self._req.cookies.update(json.loads(r.get('account_cookies')))
+        # if r.get('account_cookies'):
+        #     self._req.cookies.update(json.loads(r.get('account_cookies')))
 
     def get_cookies(self):
         return self._req.cookies.get_dict()
@@ -145,7 +145,7 @@ class Codeforces:
             return True
         try:
             res = self._req.get(f'https://{BASE_URL}/enter?back=%2F')
-            if res.text.find('Redirecting... Please, wait.'):
+            if res.text.find('Redirecting... Please, wait.') != -1:
                 pattern = re.compile(r'var a=toNumbers\("([\da-f]*)"\),b=toNumbers\("([\da-f]*)"\),c=toNumbers\("(['
                                      r'\da-f]*)"\);')
                 grps = re.search(pattern, res.text)
@@ -167,8 +167,7 @@ class Codeforces:
                 'remember': []
             }
             self._req.post(url=f'https://{BASE_URL}/enter', data=post_data)
-        except Exception as e:
-            import traceback
+        except:
             traceback.print_exc()
         return self.is_login()
 
@@ -180,7 +179,7 @@ class Codeforces:
             return True
         return False
 
-    def find_language(self):
+    def find_languages(self):
         if self.login_website() is False:
             return {}
         res = self._req.get(f'https://{BASE_URL}/problemset/submit')
@@ -198,10 +197,26 @@ class Codeforces:
     def is_working(self):
         return self._req.get(f'https://{BASE_URL}').status_code == 200
 
+    def parse_lang(self, lang: str) -> str:
+        lang = lang.lower()
+        lang_arr = [('gcc', 'c'), ('c++', 'cpp'), ('g++', 'cpp'), ('clang', 'cpp'), ('clang++', 'cpp'), ('c#', 'cs'),
+                    ('python', 'python'), ('pypy', 'python'), ('java', 'java'), ('kotlin', 'kotlin'),
+                    ('javascript', 'javascript'), ('go', 'go'), ('rust', 'rust'), ('scala', 'scala'),
+                    ('node.js', 'javascript')]
+        ret = 'plaintext'
+        for item in lang_arr:
+            if item[0] in lang:
+                ret = item[1]
+                break
+        return ret
+
     def retrieve_submission(self, gym_id: int, submission_id: int):
         code = r.get(f'{gym_id}-{submission_id}')
         if code is not None:
-            return code
+            rl = r.get(f'{gym_id}-{submission_id}-lang')
+            if rl is None:
+                rl = 'plaintext'
+            return code, rl
         self.login_website()
         try:
             url = f'https://{BASE_URL}/gym/{gym_id}/submission/{submission_id}'
@@ -209,10 +224,16 @@ class Codeforces:
             soup = BeautifulSoup(res.text, 'lxml')
             code = soup.find(id='program-source-text').text
             r.setex(f'{gym_id}-{submission_id}', 86400, code)
-            return code
-        except Exception as e:
-            print(e)
-            return None
+            try:
+                lang = soup.find('div', attrs={'class': 'datatable'}).find('table').find_all('td')[3].text.strip()
+            except:
+                traceback.print_exc()
+                lang = None
+            rl = self.parse_lang(lang) if lang else 'plaintext'
+            r.setex(f'{gym_id}-{submission_id}-lang', 86400, rl)
+            return code, rl
+        except:
+            return None, None
 
     def add_contest(self, invitation_token: str):
         if re.fullmatch(r'[\da-f]{40}', invitation_token) is None:
@@ -233,21 +254,20 @@ def hello_world():  # put application's code here
 def gym_submission(gym_id, submission_id):
     ac = Account(os.environ['USERNAME'], os.environ['PASSWORD'])
     cf = Codeforces(ac)
-    res = cf.retrieve_submission(gym_id, submission_id)
+    res, lang = cf.retrieve_submission(gym_id, submission_id)
     if res is None:
         return "Error Retrieve Submission"
     data = {
         'content': res,
         'expiration_seconds': 86400,
-        'lang': 'plaintext',
+        'lang': lang,
         'title': f'{gym_id}-{submission_id}'
     }
     try:
         pb_res = requests.post('https://paste.nugine.xyz/api/records', json=data)
         key = json.loads(pb_res.text)['key']
     except:
-        import traceback
-        traceback.print_stack()
+        traceback.print_exc()
         return 'Error'
     url = f'https://paste.nugine.xyz/{key}/'
     return redirect(url)
