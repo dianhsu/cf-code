@@ -10,7 +10,7 @@
 // @author      dianhsu
 // @run-at      document-idle
 // @downloadURL https://raw.githubusercontent.com/dianhsu/cf-code/main/script.js
-// @homepageURL https://github.com/dianhsu/cf-code
+// @homepageURL https://greasyfork.org/zh-CN/scripts/446066-gym-code-view-codeforces-com
 // @supportURL  https://github.com/dianhsu/cf-code/issues
 // @description 查看Codeforces GYM中的代码
 // ==/UserScript==
