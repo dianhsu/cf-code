@@ -6,6 +6,7 @@
 // @version     1.2
 // @author      dianhsu
 // @run-at      document-idle
+// @license     MIT
 // @downloadURL https://raw.githubusercontent.com/dianhsu/cf-code/main/script.js
 // @homepageURL https://github.com/dianhsu/cf-code
 // @supportURL  https://github.com/dianhsu/cf-code/issues
