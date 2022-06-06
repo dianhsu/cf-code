@@ -3,11 +3,13 @@
 // @namespace   Violentmonkey Scripts
 // @match       https://codeforces.com/gym/*/status
 // @grant       MIT
-// @version     1.1
+// @version     1.2
 // @author      dianhsu
 // @run-at      document-idle
 // @downloadURL https://raw.githubusercontent.com/dianhsu/cf-code/main/script.js
-// @description 2022/6/4 15:41:09
+// @homepageURL https://github.com/dianhsu/cf-code
+// @supportURL  https://github.com/dianhsu/cf-code/issues
+// @description 查看Codeforces GYM中的代码
 // ==/UserScript==
 
 $(function () {
