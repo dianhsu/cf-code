@@ -8,7 +8,7 @@
 // @match       https://codeforc.es/gym/*/status
 // @match       https://codeforc.es/submissions/*
 // @grant       MIT
-// @version     1.3
+// @version     1.4
 // @author      dianhsu
 // @run-at      document-idle
 // @downloadURL https://raw.githubusercontent.com/dianhsu/cf-code/main/script.user.js
