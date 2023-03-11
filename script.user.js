@@ -14,7 +14,7 @@
 // @downloadURL https://raw.githubusercontent.com/dianhsu/cf-code/main/script.user.js
 // @homepageURL https://greasyfork.org/zh-CN/scripts/446066-gym-code-view-codeforces-com
 // @supportURL  https://github.com/dianhsu/cf-code/issues
-// @description 查看Codeforces GYM中的代码
+// @description 在没有登录或者没有开启Coach模式的时候查看Codeforces GYM的代码
 // ==/UserScript==
 
 $(function () {
