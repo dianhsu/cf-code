@@ -1,4 +1,5 @@
 # cf-code
+> 推荐使用暴力猴，Tempermonkey会出现只能查看第一页代码的问题
 
 在没有登录或者没有开启Coach模式的时候查看Codeforces GYM的代码
 
