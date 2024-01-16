@@ -5,7 +5,7 @@
 // @grant       none
 // @version     1.0
 // @author      dianhsu
-// @grant       MIT
+// @license     MIT
 // @run-at      document-idle
 // @description auto insert problem id and language in match.
 // ==/UserScript==
