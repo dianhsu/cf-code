@@ -1,9 +1,11 @@
 // ==UserScript==
 // @name        Codeforces Match Enhancer.
 // @namespace   Violentmonkey Scripts
-// @match       https://m*.codeforces.com/contest/*/submit
+// @match       https://m1.codeforces.com/contest/*/submit
+// @match       https://m2.codeforces.com/contest/*/submit
+// @match       https://m3.codeforces.com/contest/*/submit
 // @grant       none
-// @version     1.1
+// @version     1.2
 // @author      dianhsu
 // @license     MIT
 // @run-at      document-idle
