@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        Codeforces Match Enhancer.
+// @name        Codeforces Match Enhancer
 // @namespace   Violentmonkey Scripts
 // @match       https://m*.codeforces.com/contest/*/submit
 // @grant       none
