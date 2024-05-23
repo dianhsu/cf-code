@@ -8,7 +8,7 @@
 // @match       https://codeforc.es/gym/*/status
 // @match       https://codeforc.es/submissions/*
 // @grant       MIT
-// @version     1.4
+// @version     1.5
 // @author      dianhsu
 // @run-at      document-idle
 // @downloadURL https://raw.githubusercontent.com/dianhsu/cf-code/main/script.user.js
@@ -30,7 +30,7 @@ $(function () {
     let contestId = problem.match(reg);
     if (cell.length > 0) {
       let item = document.createElement("a");
-      item.href = `https://cf.dianhsu.com/gym/${contestId}/submission/${submissionId}`;
+      item.href = `https://cf.dianhsu.com/gym/${contestId}/submission/${submissionId}?version=${GM_info.script.version}`;
       item.text = `${submissionId}`;
       item.target = '_blank';
       cell.after(item);
