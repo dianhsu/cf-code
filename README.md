@@ -1,6 +1,9 @@
 # cf-code
 > 推荐使用暴力猴，Tempermonkey会出现只能查看第一页代码的问题
 
+# 由于Codeforces长期启用Cloudflare，已经无法正常抓取代码数据，由此此项目已失效。
+
+
 在没有登录或者没有开启Coach模式的时候查看Codeforces GYM的代码
 
 未使用脚本的情况下，登录账号未开启Coach模式或者未登录时提交列表第一列的编号是纯文本。
